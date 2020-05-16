@@ -1,0 +1,56 @@
+# depslib dependency file v1.0
+1589639928 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.c
+	"cliente-mascota.h"
+
+1589288630 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\genericas.c
+	"genericas.h"
+
+1589283856 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\genericas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1589283809 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\utn.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1589295109 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.c
+	"cliente.h"
+
+1589291025 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+
+1589639986 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"genericas.h"
+	"cliente-mascota.h"
+
+1589294756 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+	"cliente.h"
+
+1589283809 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\utn.c
+	"utn.h"
+
+1589640371 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.c
+	"mascota.h"
+
+1589291450 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"mascota.h"
+
