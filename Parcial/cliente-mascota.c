@@ -35,24 +35,33 @@ void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMa
  {
     int i;
     int j;
+    int count;
+    printf("\n---------------------------------------------------------------------------------------------------------");
+    printf("\n   ID CLIENTE\t\tNOMBRE DEL CLIENTE\t\tID MASCOTA\t\tNOMBRE DE LA MASCOTA/S");
     printf("\n---------------------------------------------------------------------------------------------------------");
     for(i = 0; i < lenClientes; i++)
     {
-     printf("\n Cliente %s con ID: %d le pertenecen las siguientes mascotas", listClientes[i].nombre, listClientes[i].id);
-     printf("\n---------------------------------------------------------------------------------------------------------");
-     printf("\n   ID MASCOTA\t\tNOMBRE");
+        count = 0;
+        printf("\n\t%d   \t%15s", listClientes[i].id, listClientes[i].nombre);
         for(j = 0; j < lenMascotas; j++)
         {
-
             if(listClientes[i].isEmpty != 1 && listMascotas[j].isEmpty != 1)
             {
                 if(listClientes[i].id == listMascotas[j].idDuenio)
                 {
-                    printf("\n\t%d   \t%15s",listMascotas[j].idDuenio, listMascotas[j].nombre);
+                    if(count > 0)
+                    {
+                      printf("\t\t\t\t\t\t\t  %d\t\t %15s\n", listMascotas[j].id, listMascotas[j].nombre);
+                    }
+                    else
+                    {
+                       printf("\t\t\t\t  %d\t\t %15s\n", listMascotas[j].id, listMascotas[j].nombre);
+                    }
+                    count ++;
                 }
             }
         }
-    printf("\n---------------------------------------------------------------------------------------------------------");
+    printf("---------------------------------------------------------------------------------------------------------");
     }
     printf("\n");
  }

@@ -37,5 +37,3 @@ int masc_findById(eMascota* list, int len,int codigo);
 void masc_swapForSort(eMascota* list, int iControl);
 int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente);
 int masc_getOneDataModify(eMascota* getOne, int id, char* msg);
-
-int masc_findIdInCliente(eCliente* list, int len, int idCliente);

@@ -201,7 +201,7 @@ int masc_PrintList(eMascota* list, int len, eCliente* listCliente, int lenClient
             {
                 printf("\n %d  %s\t%10s", list[i].id, list[i].nombre,MAS_TIPOS[list[i].tipo]);
                 printf("\t%s\t%d\t%c\t%.2f", list[i].raza, list[i].edad, list[i].sexo, list[i].peso);
-                index = masc_findIdInCliente(listCliente, lenCliente, list[i].idDuenio);
+                index = cli_findById(listCliente, lenCliente, list[i].idDuenio);
                 if(index >= 0)
                 {
                     printf("\t%d\t\t%s", list[i].idDuenio, listCliente[index].nombre);
@@ -269,7 +269,7 @@ int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, 
             printf("\nLISTADO DE DUEniOS DISPONIBLES\n");
             cli_PrintList(listCliente, lenCliente);
             if(utn_getNumber(&getOne->idDuenio, "\nIngresar ID del duenio: ", "Error, fuera de rango.", 0 , 10000, 3)
-               && masc_findIdInCliente(listCliente, lenCliente, getOne->idDuenio))
+               && cli_findById(listCliente, lenCliente, getOne->idDuenio) >= 0)
             {
                 getOne->id = id;
                 getOne->isEmpty = 0;
@@ -295,21 +295,5 @@ int masc_getOneDataModify(eMascota* getOne, int id, char* msg)
                 getOne->isEmpty = 0;
                 retorno = 1;
             }
-    return retorno;
-}
-
-int masc_findIdInCliente(eCliente* list, int len, int idCliente)
-{
-    int retorno = 0;
-    int index;
-    index = cli_findById(list, len, idCliente);
-    if( index >= 0 &&  list[index].isEmpty == 0)
-    {
-        retorno = index;
-    }
-    else
-    {
-        printf(" El id del CLIENTE no existe!");
-    }
     return retorno;
 }

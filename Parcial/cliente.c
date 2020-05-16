@@ -61,6 +61,7 @@ int cli_Add(eCliente* list,int len, int* id)
         {
             retorno = 1;
             list[index] = auxCliente;
+            printf("ID DEL ULTIMO: %d", list[index].id);
             (*id)++;
         }
     }
@@ -68,7 +69,7 @@ int cli_Add(eCliente* list,int len, int* id)
 }
 void cli_hardCodear(eCliente* list, int len)
 {
-    int id[5]= {1,2,3,4,5};
+    int id[5]= {0,1,2,3,4};
     char nombre[5][CLI_LENNOMBRE]= {"Graciela","Carlos","Martina","Luis","Roberto"};
     char apellido[5][CLI_LENAPELLIDO]= {"Sabato","Carabajal","Lopez","Gerez","Blanco"};
     char localidad[5][CLI_LENLOCALIDAD]= {"Lomas","Avellaneda","Guillon","Temperley","Adrogue"};
@@ -190,14 +191,17 @@ int cli_PrintList(eCliente* list, int len)
     if(list != NULL && len > 0)
     {
         retorno = 1;
-        printf("ID\tNOMBREA\t\tPELLIDO\t\tLOCALIDAD\tTELEFONO\tEDAD\tSEXO");
+        printf("\n>> LISTADO DE CLIENTES");
+        printf("\n----------------------------------------------------------------------------------------------------\n");
+        printf("  ID\t\tNOMBRE\t\tPELLIDO\t\tLOCALIDAD\tTELEFONO\tEDAD\tSEXO");
         for(i=0; i<len; i++)
         {
             if(list[i].isEmpty == 0)
             {
-                printf("\n%d\t%10s\t%10s\t%10s\t%7s\t\t%d\t%c ", list[i].id, list[i].nombre, list[i].apellido, list[i].localidad, list[i].telefono, list[i].edad, list[i].sexo);
+                printf("\n  %d\t%15s\t%15s\t%15s\t\t%7s\t\t%d\t%c ", list[i].id, list[i].nombre, list[i].apellido, list[i].localidad, list[i].telefono, list[i].edad, list[i].sexo);
             }
         }
+        printf("\n----------------------------------------------------------------------------------------------------\n");
     }
     return retorno;
 }
@@ -209,7 +213,7 @@ int cli_findById(eCliente* list, int len,int id)
     {
         for(i = 0; i < len; i ++)
         {
-            if(list[i].id == id && list[i].isEmpty != 1)
+            if(list[i].id == id && list[i].isEmpty == 0)
             {
                 retorno = i;
                 break;
