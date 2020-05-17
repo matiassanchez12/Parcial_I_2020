@@ -144,43 +144,6 @@ int cli_Remove(eCliente* list, int len)
     }
     return retorno;
 }
-/*
-int cli_Sort(eCliente* list, int len)
-{
-    int retorno = 0;
-    int flagSwap;
-    int i;
-    int auxiliarCmp1;
-    int auxiliarCmp2;
-    do
-    {
-        flagSwap = 0;
-        for(i=0; i<len-1; i++)
-        {
-            if(list[i].isEmpty == 1 || list[i+1].isEmpty == 1)
-            {
-                continue;
-            }
-            auxiliarCmp1 = strcmp(list[i].nombre,list[i+1].nombre);
-            auxiliarCmp2 = strcmp(list[i].lugar,list[i+1].lugar);
-            if(auxiliarCmp1 > 0 || (auxiliarCmp1 == 0 && auxiliarCmp2 < 0))
-            {
-                retorno = 1;
-                flagSwap = 1;
-                cli_swapForSort(list, i);
-            }
-        }
-        len--;
-    }
-    while(flagSwap);
-    if(flagSwap == 0)
-    {
-        printf("\n\nNo hay suficientes datos cargados para ordenar.\n\n");
-    }
-
-
-    return retorno;
-}*/
 
 int cli_PrintList(eCliente* list, int len)
 {

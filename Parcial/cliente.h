@@ -28,7 +28,6 @@ int cli_initializer(eCliente* list, int len);
 int cli_Add(eCliente* list,int len, int* id);
 int cli_Modify(eCliente* list, int len);
 int cli_Remove(eCliente* list, int len);
-int cli_Sort(eCliente* list, int len);
 int cli_PrintList(eCliente* list, int len);
 int cli_findIndexEmpty(eCliente* list, int len);
 int cli_findById(eCliente* list, int len,int codigo);
