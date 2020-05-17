@@ -4,7 +4,7 @@
 #include "genericas.h"
 #include "cliente-mascota.h"
 
-#define QUANTITY_CLIENTES 5
+#define QUANTITY_CLIENTES 6
 #define QUANTITY_MASCOTAS 11
 /***
 *FALTA:
@@ -15,7 +15,6 @@ int main()
     int option;
     int idCliente = 0;
     int idMascotas = 0;
-    int prueba;
     eCliente listClientes[QUANTITY_CLIENTES];
     eMascota listMascotas[QUANTITY_MASCOTAS];
 
@@ -24,14 +23,10 @@ int main()
         do
         {
             system("cls");
-
-                cli_hardCodear(listClientes, QUANTITY_CLIENTES);
-
-                prueba = cli_findById(listClientes, QUANTITY_CLIENTES, 0);
-                printf("PRUEBA -1 NO  +0 SI: %d", prueba);
+            masc_hardCodear(listMascotas, QUANTITY_MASCOTAS);
+            cli_hardCodear(listClientes, QUANTITY_CLIENTES);
             if(mainMenu(&option))
             {
-                //masc_hardCodear(listMascotas, QUANTITY_MASCOTAS);
                 switch(option)
                 {
                 case 1:
@@ -45,7 +40,8 @@ int main()
                     break;
                 }
             }
-       }while(option != 4);
+        }
+        while(option != 4);
     }
 
     return 0;

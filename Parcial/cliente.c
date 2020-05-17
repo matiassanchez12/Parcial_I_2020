@@ -17,16 +17,16 @@ void cli_menuEntity(char* msgTitleMenu, eCliente* list, int lenghtList, int* id)
             switch(option)
             {
             case 1:
-                 gen_checkReturnWithSwitch(cli_Add(list, lenghtList, id), "\n\nAccion finalizada con exito!", "\n\nNo se logro ejecutar con exito..", "\n\nError. No hay mas espacio");
+                 gen_checkReturnWithSwitch(cli_Add(list, lenghtList, id), "\n\nAccion finalizada con exito!", "\n\nAccion cancelada..", "\n\nError. No hay mas espacio");
                 break;
             case 2:
-                //gen_checkReturnWithSwitch(cli_Remove(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nNo se logro ejecutar con exito..", "\n\nError. No se encontraron datos");
+                gen_checkReturnWithSwitch(cli_Remove(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nAccion cancelada..", "\n\nError. No se encontraron datos");
                 break;
             case 3:
-                //gen_checkReturnWithSwitch(cli_Modify(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nNo se logro ejecutar con exito..", "\n\nError. No se encontraron datos");
+                gen_checkReturnWithSwitch(cli_Modify(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nAccion cancelada..", "\n\nError. No se encontraron datos");
                 break;
             case 4:
-                gen_checkReturnWithSwitch(cli_PrintList(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nNo se logro ejecutar con exito..", "\n\nError. No se encontraron datos");
+                gen_checkReturnWithIf(cli_PrintList(list, lenghtList), "\n\nAccion finalizada con exito!", "\n\nError. No se encontraron datos");
                 break;
             }
         }
@@ -61,7 +61,6 @@ int cli_Add(eCliente* list,int len, int* id)
         {
             retorno = 1;
             list[index] = auxCliente;
-            printf("ID DEL ULTIMO: %d", list[index].id);
             (*id)++;
         }
     }
@@ -69,11 +68,11 @@ int cli_Add(eCliente* list,int len, int* id)
 }
 void cli_hardCodear(eCliente* list, int len)
 {
-    int id[5]= {0,1,2,3,4};
+    int id[5]= {1,2,3,4,5};
     char nombre[5][CLI_LENNOMBRE]= {"Graciela","Carlos","Martina","Luis","Roberto"};
     char apellido[5][CLI_LENAPELLIDO]= {"Sabato","Carabajal","Lopez","Gerez","Blanco"};
     char localidad[5][CLI_LENLOCALIDAD]= {"Lomas","Avellaneda","Guillon","Temperley","Adrogue"};
-    char telefono[5][CLI_LENTELEFONO]= {"12333","12333","1233333","123333","123333"};
+    char telefono[5][CLI_LENTELEFONO]= {"123-33","123-33","1233-333","123-333","123333"};
     int edad[5]= {50,55,30,22,45};
     char sexo[5]= {'f','m','f','m','m'};
     int i;
@@ -89,8 +88,8 @@ void cli_hardCodear(eCliente* list, int len)
         list[i].isEmpty = 0;
     }
 }
-///-1 no se pudo encontrar id, 0 accion cancelada, 1 todo ok
-/*
+
+
 int cli_Modify(eCliente* list, int len)
 {
     int retorno = -1;
@@ -99,8 +98,8 @@ int cli_Modify(eCliente* list, int len)
     int id;
     int index;
     printf(">>Menu de modificaciones\n");
-    cli_PrintList(list, len);
-    if(list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
+
+    if(cli_PrintList(list, len) && list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
     {
         index = cli_findById(list, len, id);
         if(index >= 0 && list[index].isEmpty != 1)
@@ -108,7 +107,7 @@ int cli_Modify(eCliente* list, int len)
             retorno = 0;
             if(cli_getOneData(&auxCliente, id, "\nIngresar nuevos datos\n") == 1)
             {
-                printf("\nRealizar modificacion? [s] o [n]");
+                printf("\n>> Realizar modificacion? [s] o [n]");
                 if(utn_getOnlyTwoChars(&confirm, "\nIngresar una opcion:", "Error solo [s] o [n].", 's', 'n', 2)
                         && confirm == 's')
                 {
@@ -120,7 +119,7 @@ int cli_Modify(eCliente* list, int len)
     }
     return retorno;
 }
-///-1 no se pudo encontrar id, 0 accion cancelada, 1 todo ok
+
 int cli_Remove(eCliente* list, int len)
 {
     int retorno = -1;
@@ -128,14 +127,13 @@ int cli_Remove(eCliente* list, int len)
     int id;
     int index;
     printf("\n>>Menu de bajas\n\n");
-    cli_PrintList(list, len);
-    if(list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
+    if(cli_PrintList(list, len) && list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
     {
         index = cli_findById(list, len, id);
-        if(index >= 0 && list[index].isEmpty != 1)
+        if(index >= 0)
         {
             retorno = 0;
-            printf("\n\nSeguro desea realizar la baja? [s] o [n] ");
+            printf("\n\n>> Realizar la baja? [s] o [n].");
             if(utn_getOnlyTwoChars(&confirm, "\nIngresar una opcion: ", "Error solo [s] o [n].", 's', 'n', 2)
                     && confirm == 's')
             {
@@ -146,7 +144,7 @@ int cli_Remove(eCliente* list, int len)
     }
     return retorno;
 }
-
+/*
 int cli_Sort(eCliente* list, int len)
 {
     int retorno = 0;
@@ -191,17 +189,18 @@ int cli_PrintList(eCliente* list, int len)
     if(list != NULL && len > 0)
     {
         retorno = 1;
-        printf("\n>> LISTADO DE CLIENTES");
-        printf("\n----------------------------------------------------------------------------------------------------\n");
-        printf("  ID\t\tNOMBRE\t\tPELLIDO\t\tLOCALIDAD\tTELEFONO\tEDAD\tSEXO");
+        printf("\n|----------------------------------------------------------------------------------------------------|");
+        printf("\n|>> LISTADO DE CLIENTES >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|");
+        printf("\n|----------------------------------------------------------------------------------------------------|\n");
+        printf(" |ID\t\tNOMBRE\t\tPELLIDO\t\tLOCALIDAD\tTELEFONO\tEDAD\tSEXO\t   |");
         for(i=0; i<len; i++)
         {
             if(list[i].isEmpty == 0)
             {
-                printf("\n  %d\t%15s\t%15s\t%15s\t\t%7s\t\t%d\t%c ", list[i].id, list[i].nombre, list[i].apellido, list[i].localidad, list[i].telefono, list[i].edad, list[i].sexo);
+                printf("\n |%d\t%15s\t%15s\t%15s\t     %10s\t\t%d\t %c\t   |", list[i].id, list[i].nombre, list[i].apellido, list[i].localidad, list[i].telefono, list[i].edad, list[i].sexo);
             }
         }
-        printf("\n----------------------------------------------------------------------------------------------------\n");
+        printf("\n|---------------------------------------------------------------------------------------------------|\n");
     }
     return retorno;
 }

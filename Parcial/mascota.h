@@ -27,13 +27,15 @@ void masc_menuEntity(char* msgTitleMenu, eMascota* list, int lenghtList, int* id
 
 void masc_hardCodear(eMascota* list, int tam);
 int masc_initializer(eMascota* list, int len);
-int masc_Add(eMascota* list,int len, int* id, eCliente* listCliente, int lenCliente);
-int masc_Modify(eMascota* list, int len, eCliente* listCliente, int lenCliente);
-int masc_Remove(eMascota* list, int len, eCliente* listCliente, int lenCliente);
+int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listCliente, int lenCliente);
+int masc_Modify(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente);
+int masc_Remove(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente);
 int masc_Sort(eMascota* list, int len);
-int masc_PrintList(eMascota* list, int len, eCliente* listCliente, int lenCliente);
+int masc_PrintList(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente);
 int masc_findIndexEmpty(eMascota* list, int len);
 int masc_findById(eMascota* list, int len,int codigo);
 void masc_swapForSort(eMascota* list, int iControl);
 int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente);
 int masc_getOneDataModify(eMascota* getOne, int id, char* msg);
+///INFORMES
+int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente);

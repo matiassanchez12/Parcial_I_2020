@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1589669366 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.c
+1589685121 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.c
 	"cliente-mascota.h"
 
 1589288630 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\genericas.c
@@ -16,7 +16,7 @@
 	<stdlib.h>
 	<string.h>
 
-1589671470 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.c
+1589680259 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.c
 	"cliente.h"
 
 1589291025 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.h
@@ -26,14 +26,14 @@
 	"utn.h"
 	"genericas.h"
 
-1589670781 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\main.c
+1589676092 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"genericas.h"
 	"cliente-mascota.h"
 
-1589671511 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.h
+1589684891 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -44,10 +44,10 @@
 1589283809 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\utn.c
 	"utn.h"
 
-1589671510 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.c
+1589684891 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.c
 	"mascota.h"
 
-1589291450 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.h
+1589683357 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
