@@ -7,6 +7,10 @@ static int acumEdadMascotasPorTipo(eMascota* list, int len, int tipo);
 static int promEdadMascotas(eMascota* list, int len);
 static int countEdadMascotas(eMascota* list, int len);
 static int acumEdadMascotas(eMascota* list, int len);
+///18
+static int promClientesSegunSexo(eCliente* list, int len);
+static int countTodosLosClientes(eCliente* list, int len);
+static int countClientesPorSexo(eCliente* list, int len, char sexo);
 
 void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas,eCliente* listClientes, int lenClientes, eInformeCantidad* listInformes)
 {
@@ -19,11 +23,12 @@ void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas
         printf("\n[2] INFORMAR MASCOTAS CON SUS DUENIOS, ORDENADAS POR TIPO");
         printf("\n[3] INFORMAR DUENIOS CON MAS DE UNA MASCOTA");
         printf("\n[4] INFORMAR DUENIOS CON MASCOTAS MAYORES A 3 ANIOS");
-        printf("\n[5] INFORMAS MASCOTAS DE UN TIPO DETERMINADO");
+        printf("\n[5] MENU DE MOSTRAR MASCOTAS DE UN TIPO:\n ->> 0. Perro\n ->> 1. Gato\n ->> 2. Raro");
         printf("\n[6] MENU DE ORDENAMIENTOS:\n ->> 1. Clientes ordenados por cantidad de mascotas\n ->> 2. Clientes ordenados por cantidad de mascotas y nombre");
         printf("\n[7] MENU DE PROMEDIOS:\n ->> 1. Promedio de edad entre las mascotas\n ->> 2. Promedio de edad entre las mascotas, por tipo ");
-        printf("\n[8] VOLVER AL MENU PRINCIPAL\n");
-        if(utn_getNumber(&option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 8, 2))
+        printf("\n[8] INFORMAR EL PROMEDIO ACTUAL DE CLIENTES Y CLIENTAS");
+        printf("\n[9] VOLVER AL MENU PRINCIPAL\n");
+        if(utn_getNumber(&option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 9, 2))
         {
             switch(option)
             {
@@ -43,16 +48,20 @@ void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas
                 gen_checkReturnWithIf(masc_PrintForType(listMascotas, lenMascotas, listClientes, lenClientes),"\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
                 break;
             case 6:
+                info_contMascotasDeCliente(listClientes, lenClientes, listMascotas, lenMascotas, listInformes);
                 gen_checkReturnWithIf(info_menuParaMostrarClientesOrdenados(listInformes, lenClientes),"\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
                 break;
             case 7:
                 gen_checkReturnWithIf( info_menuPromediarEdadMascotas(listMascotas, lenMascotas),"\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
                 break;
+            case 8:
+                gen_checkReturnWithIf(promClientesSegunSexo(listClientes, lenClientes), "\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
+                break;
             }
         }
         system("pause");
     }
-    while(option != 8);
+    while(option != 9);
 }
 
 void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
@@ -169,7 +178,7 @@ void info_mostrarClienteConMascotasMayoresAtres(eCliente* listClientes, int lenC
     printf("\n|---------------------------------------------------------------------------------------------------------|");
     printf("\n|>> Listando mascotas mayores a 3 anios.. >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>|");
     printf("\n|---------------------------------------------------------------------------------------------------------|");
-    printf("\n|   ID CLIENTE\t    NOMBRE DEL CLIENTE\t\tID MASCOTA\tNOMBRE DE LAS MASCOTAS\t\t\t  |");
+    printf("\n|   ID CLIENTE\t    NOMBRE DEL CLIENTE\t\tID MASCOTA\tNOMBRE DE LAS MASCOTAS\t\tEDAD\t  |");
     printf("\n|---------------------------------------------------------------------------------------------------------|\n");
     for(i = 0; i < lenClientes; i++)
     {
@@ -186,13 +195,11 @@ void info_mostrarClienteConMascotasMayoresAtres(eCliente* listClientes, int lenC
             }
             if(listClientes[i].id == listMascotas[j].idDuenio && listMascotas[j].edad > 3)
             {
-                printf("|\t%d   \t%15s\t\t\t  %d\t\t %15s\t\t\t\t  |\n", listClientes[i].id, listClientes[i].nombre, listMascotas[j].id, listMascotas[j].nombre);
+                printf("|\t%d   \t%15s\t\t\t  %d\t\t %15s\t\t%2d\t  |\n", listClientes[i].id, listClientes[i].nombre, listMascotas[j].id, listMascotas[j].nombre, listMascotas[j].edad);
                 printf("|---------------------------------------------------------------------------------------------------------|\n");
             }
         }
-
     }
-
     printf("\n");
 }
 
@@ -205,13 +212,14 @@ void info_contMascotasDeCliente(eCliente* listClientes, int lenClientes, eMascot
     {
         count = 0;
         arrayDeInformes[i].isEmpty = 0;
+
+        if(listClientes[i].isEmpty == 1)
+        {
+            arrayDeInformes[i].isEmpty = 1;
+            continue;
+        }
         for(j = 0; j < lenMascotas; j++)
         {
-            if(listClientes[i].isEmpty == 1)
-            {
-                arrayDeInformes[i].isEmpty = 1;
-                continue;
-            }
             if(listClientes[i].id == listMascotas[j].idDuenio && listMascotas[j].isEmpty != 1)
             {
                 count ++;
@@ -415,7 +423,6 @@ static int promEdadMascotasPorTipo(eMascota* list, int len)
         {
             printf("\n=============================>> Informe solicitado <<================================\n");
             ret = 1;
-            printf("\n COUNT : %d ACUM : %d", countEdadMascota, acumEdadMascota);
             promEdad =  (float) acumEdadMascota / countEdadMascota;
             printf("\n\n> El promedio de edad entre mascotas del tipo: [%s] , es: [%.2f].\n", MAS_TIPOS[tipo], promEdad);
             printf("\n=====================================================================================\n");
@@ -508,7 +515,6 @@ static int countEdadMascotas(eMascota* list, int len)
     {
         for(i = 0; i < len; i++)
         {
-
             if(list[i].isEmpty == 0)
             {
                 count ++;
@@ -538,4 +544,110 @@ static int acumEdadMascotas(eMascota* list, int len)
     ret = acum;
 
     return ret;
+}
+///PUNTO 18
+static int promClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float promM;
+    float promF;
+    if(list != NULL && len > 0)
+    {
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            promF =  (float) countClienteF / totalDeClientes;
+            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
+            promM =  (float) countClienteM / totalDeClientes;
+            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}
+
+static int countClientesPorSexo(eCliente* list, int len, char sexo)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0 && list[i].sexo == sexo)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
+static int countTodosLosClientes(eCliente* list, int len)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
+int info_bajaEnCascadaCliente(eCliente* list, int len, eMascota* listMascotas, int lenMascotas)
+{
+    int retorno = -1;
+    char confirm;
+    int i;
+    int id;
+    int index;
+    printf("\n>>Realizar baja en cascada de CLIENTES\n\n");
+    if(cli_PrintList(list, len) && list != NULL && len > 0 && listMascotas != NULL && lenMascotas > 0
+            && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
+    {
+        index = cli_findById(list, len, id);
+        if(index >= 0)
+        {
+            retorno = 0;
+            printf("\n>> Aviso: al dar de baja el cliente con nombre: [%s], se eliminaran las mascotas que le pertenecen. \n\n>> Realizar la baja?[s] o [n].", list[index].nombre);
+            if(utn_getOnlyTwoChars(&confirm, "\n Ingresar una opcion: ", "Error solo [s] o [n].", 's', 'n', 2)
+                    && confirm == 's')
+            {
+                for(i = 0; i < lenMascotas; i ++)
+                {
+                    if(list[index].id == listMascotas[i].idDuenio)
+                    {
+                        listMascotas[i].isEmpty = 1;
+                    }
+                }
+                list[index].isEmpty = 1;
+                retorno = 1;
+            }
+        }
+    }
+    return retorno;
 }

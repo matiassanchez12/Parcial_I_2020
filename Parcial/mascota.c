@@ -198,7 +198,7 @@ int masc_PrintList(eMascota* listMascotas, int lenMascotas, eCliente* listClient
         for(i=0; i<lenMascotas; i++)
         {
             index = cli_findById(listCliente, lenCliente, listMascotas[i].idDuenio);
-            if(listMascotas[i].isEmpty == 0)
+            if(index != -1 && listMascotas[i].isEmpty == 0)
             {
                 printf("\n| %d\t%15s\t%15s", listMascotas[i].id, listMascotas[i].nombre,MAS_TIPOS[listMascotas[i].tipo]);
                 printf("\t   %10s\t %d\t%c\t%.2f", listMascotas[i].raza, listMascotas[i].edad, listMascotas[i].sexo, listMascotas[i].peso);
@@ -208,7 +208,7 @@ int masc_PrintList(eMascota* listMascotas, int lenMascotas, eCliente* listClient
                 }
                 else
                 {
-                    printf("No se encontro dueño para el animal.");
+                    printf("\t|\tDADO DE BAJA\t|");
                 }
             }
         }
@@ -309,20 +309,25 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
     int i;
     int index;
     int type;
-    printf("--------------------------------------------------------------------------------------------------------\n");
+
+    do
+    {
+    system("cls");
+    printf("\n--------------------------------------------------------------------------------------------------------\n");
     printf(">> Listar mascotas segun un tipo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
     printf("--------------------------------------------------------------------------------------------------------\n");
     printf("\nQue tipo de mascota que desea mostrar?\n[0]PERRO\n[1]GATO\n[2]RARO\n[3]Salir\n");
     if(listMascotas != NULL && lenMascotas > 0
-            && utn_getNumber(&type, "Ingrese una opcion: ", "Error, ingresar (0 / 1 / 2 / 3).", 0, 3, 3) && type != 3)
+            && utn_getNumber(&type, "\nIngrese una opcion: ", "Error, ingresar (0 / 1 / 2 / 3).", 0, 3, 3) && type != 3)
     {
         retorno = 1;
-        printf("| ID\t\tNOMBRE\t\t   TIPO\t\tRAZA\tEDAD\tSEXO\tPESO\t|    NOMBRE DEL DUENIO   |");
+        printf("\n--------------------------------------------------------------------------------------------------------");
+        printf("\n| ID\t\tNOMBRE\t\t   TIPO\t\tRAZA\tEDAD\tSEXO\tPESO\t|    NOMBRE DEL DUENIO   |");
         printf("\n--------------------------------------------------------------------------------------------------------");
         for(i=0; i<lenMascotas; i++)
         {
             index = cli_findById(listCliente, lenCliente, listMascotas[i].idDuenio);
-            if(listMascotas[i].isEmpty == 0 && listMascotas[i].tipo == type)
+            if(index != -1 && listMascotas[i].tipo == type)
             {
                 printf("\n| %d\t%15s\t%15s", listMascotas[i].id, listMascotas[i].nombre,MAS_TIPOS[listMascotas[i].tipo]);
                 printf("\t   %10s\t %d\t%c\t%.2f", listMascotas[i].raza, listMascotas[i].edad, listMascotas[i].sexo, listMascotas[i].peso);
@@ -332,11 +337,18 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
                 }
                 else
                 {
-                    printf("No se encontro dueño para el animal.");
+                    printf("\t|\tDADO DE BAJA\t|");
                 }
             }
         }
-        // printf("\n---------------------------------------------------------------------------------------------------------\n");
+        printf("\n---------------------------------------------------------------------------------------------------------\n\n");
+        system("pause");
+    }
+    }while(type != 3);
+
+    if(type == 3)
+    {
+        retorno = 1;
     }
     return retorno;
 }

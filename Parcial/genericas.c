@@ -9,8 +9,9 @@ int mainMenu(int* option)
         printf("\n[1] Menu ABM de CLIENTES");
         printf("\n[2] Menu ABM de MASCOTAS");
         printf("\n[3] Menu de INFORMES");
-        printf("\n[4] Salir del programa");
-        if(utn_getNumber(option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 4, 2))
+        printf("\n[4] Baja en cascada de CLIENTES");
+        printf("\n[5] Salir del programa");
+        if(utn_getNumber(option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 5, 2))
         {
             retorno = 1;
         }

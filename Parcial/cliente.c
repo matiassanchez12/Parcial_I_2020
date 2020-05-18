@@ -1,5 +1,6 @@
 #include "cliente.h"
 
+
 void cli_menuEntity(char* msgTitleMenu, eCliente* list, int lenghtList, int* id)
 {
     int option;
@@ -89,6 +90,30 @@ void cli_hardCodear(eCliente* list, int len)
     }
 }
 
+int cli_Remove(eCliente* list, int len)
+{
+    int retorno = -1;
+    char confirm;
+    int id;
+    int index;
+    printf("\n>>Menu de bajas\n\n");
+    if(cli_PrintList(list, len) && list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
+    {
+        index = cli_findById(list, len, id);
+        if(index >= 0)
+        {
+            retorno = 0;
+            printf("\n\n>> Realizar la baja? [s] o [n].");
+            if(utn_getOnlyTwoChars(&confirm, "\nIngresar una opcion: ", "Error solo [s] o [n].", 's', 'n', 2)
+                    && confirm == 's')
+            {
+                list[index].isEmpty = 1;
+                retorno = 1;
+            }
+        }
+    }
+    return retorno;
+}
 
 int cli_Modify(eCliente* list, int len)
 {
@@ -120,30 +145,6 @@ int cli_Modify(eCliente* list, int len)
     return retorno;
 }
 
-int cli_Remove(eCliente* list, int len)
-{
-    int retorno = -1;
-    char confirm;
-    int id;
-    int index;
-    printf("\n>>Menu de bajas\n\n");
-    if(cli_PrintList(list, len) && list != NULL && len > 0 && utn_getNumber(&id, "\n\nIngresar un id: ", "Error, fuera de rango.", 0, 10000, 2))
-    {
-        index = cli_findById(list, len, id);
-        if(index >= 0)
-        {
-            retorno = 0;
-            printf("\n\n>> Realizar la baja? [s] o [n].");
-            if(utn_getOnlyTwoChars(&confirm, "\nIngresar una opcion: ", "Error solo [s] o [n].", 's', 'n', 2)
-                    && confirm == 's')
-            {
-                list[index].isEmpty = 1;
-                retorno = 1;
-            }
-        }
-    }
-    return retorno;
-}
 
 int cli_PrintList(eCliente* list, int len)
 {
@@ -228,4 +229,5 @@ int cli_getOneData(eCliente* getOne, int id, char* msg)
     }
     return retorno;
 }
+
 

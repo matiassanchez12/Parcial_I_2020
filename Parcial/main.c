@@ -4,12 +4,9 @@
 #include "genericas.h"
 #include "cliente-mascota.h"
 
-#define QUANTITY_CLIENTES 6
+#define QUANTITY_CLIENTES 5
 #define QUANTITY_MASCOTAS 11
-/***
-*FALTA:
-** HACER UNA BAJA EN CASCADA DE EMPLEADOS
-***/
+
 int main()
 {
     int option;
@@ -21,12 +18,12 @@ int main()
 
     if(cli_initializer(listClientes, QUANTITY_CLIENTES) && masc_initializer(listMascotas, QUANTITY_MASCOTAS))
     {
+        masc_hardCodear(listMascotas, QUANTITY_MASCOTAS);
+        cli_hardCodear(listClientes, QUANTITY_CLIENTES);
         do
         {
             system("cls");
-            masc_hardCodear(listMascotas, QUANTITY_MASCOTAS);
-            cli_hardCodear(listClientes, QUANTITY_CLIENTES);
-            info_contMascotasDeCliente(listClientes, QUANTITY_CLIENTES, listMascotas, QUANTITY_MASCOTAS, listInformes);
+
             if(mainMenu(&option))
             {
                 switch(option)
@@ -41,11 +38,15 @@ int main()
                     info_menuEntity("\n>> MENU INFORMES\n\n", listMascotas, QUANTITY_MASCOTAS, listClientes, QUANTITY_CLIENTES, listInformes);
                     break;
                 case 4:
+                    gen_checkReturnWithSwitch(info_bajaEnCascadaCliente(listClientes, QUANTITY_CLIENTES, listMascotas, QUANTITY_MASCOTAS), "\n\nAccion finalizada con exito!\n\n", "\n\nAccion cancelada..\n\n", "\n\nError. No se encontraron datos\n\n");
+                    system("pause");
+                    break;
+                case 5:
                     printf("\n\n Saliendo del programa. Hasta luego.. :)\n");
                 }
             }
         }
-        while(option != 4);
+        while(option != 5);
     }
 
     return 0;

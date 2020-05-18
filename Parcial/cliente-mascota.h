@@ -26,3 +26,5 @@ int info_sortClientePorCantidadYNombre(eInformeCantidad* listInformes, int lenCl
 int info_menuParaMostrarClientesOrdenados(eInformeCantidad* listInformes, int lenListClientes);
 
 int info_menuPromediarEdadMascotas(eMascota* list, int len);
+
+int info_bajaEnCascadaCliente(eCliente* list, int len, eMascota* listMascotas, int lenMascotas);
