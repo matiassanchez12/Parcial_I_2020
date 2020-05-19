@@ -1,5 +1,15 @@
 #include "mascota.h"
-
+/** \brief despliega un menu propio de la entidad mascota
+ *
+ * \param msgTitleMenu char* titulo que aparece en la parte superior del menu
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int cantidad maxima del array de mascotas
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int cantidad maxima del array de clientes
+ * \param id int* listado de informes
+ * \return void
+ *
+ */
 void masc_menuEntity(char* msgTitleMenu, eMascota* list, int lenghtList, int* id, eCliente* listCliente, int lenCliente)
 {
     int option;
@@ -70,8 +80,8 @@ int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listClie
 void masc_hardCodear(eMascota* list, int len)
 {
     int id[11]= {1,2,3,4,5,6,7,8,9,10,11};
-    char nombre[11][MAS_LENNOMBRE]= {"gata1","gata2","Perro1","Perro2","Gato3","Pitbull","Iguana","Labrador","gato4","gato5","Bulldog"};
-    char raza[11][MAS_LENRAZA]= {"Siames","Siames","Salchicha","Salchicha","Siames","Pitbull","Mexicana","Labrador","Siames","Siames","Bulldog"};
+    char nombre[11][MAS_LENNOMBRE]= {"gata1","gata2","Perro1","Perro2","Gatubelo","Pitbull","Iguana","Baco","Mishito","Pino","Bulldog"};
+    char raza[11][MAS_LENRAZA]= {"Siames","Siames","Salchicha","Salchicha","Siames","Pitbull","Iguana","Labrador","Siames","Siames","Bulldog"};
     int tipo[11]= {1,1,0,0,1,0,2,0,1,1,0};
     int edad[11]= {10,3,5,3,2, 2, 3, 13, 3, 2, 10};
     char sexo[11]= {'f','f','m','m','m','m','f','m','m','m','f'};
@@ -259,41 +269,41 @@ void masc_swapForSort(eMascota* list, int iControl)
     list[iControl+1] = auxMascota;
 }
 
-
+/*
 int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente)
 {
-    int retorno = 0;
-    printf("%s", msg);
-    if(utn_getString(getOne->nombre, MAS_LENNOMBRE, "\nIngresar un nombre: ", "Error. Dato invalido.", 2)
-            && utn_getString(getOne->raza, MAS_LENRAZA, "\nIngresar un raza: ", "Error. Dato invalido.", 2)
-            && utn_getNumber(&getOne->edad, "Ingresar edad: ", "Error, fuera de rango.", 0, 120, 3)
-            && utn_getNumberFloat(&getOne->peso, "Ingresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
-            && utn_getOnlyTwoChars(&getOne->sexo, "Ingresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
-            && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascora \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 3, 3))
-    {
-        printf("\nLISTADO DE DUEniOS DISPONIBLES\n");
-        cli_PrintList(listCliente, lenCliente);
-        if(utn_getNumber(&getOne->idDuenio, "\nIngresar ID del duenio: ", "Error, fuera de rango.", 0, 10000, 3)
-                && cli_findById(listCliente, lenCliente, getOne->idDuenio) >= 0)
-        {
-            getOne->id = id;
-            getOne->isEmpty = 0;
-            retorno = 1;
-        }
+ int retorno = 0;
+ printf("%s", msg);
+ if(utn_getString(getOne->nombre, MAS_LENNOMBRE, "\nIngresar un nombre: ", "Error. Dato invalido.", 2)
+         && utn_getString(getOne->raza, MAS_LENRAZA, "\nIngresar un raza: ", "Error. Dato invalido.", 2)
+         && utn_getNumber(&getOne->edad, "Ingresar edad: ", "Error, fuera de rango.", 0, 120, 3)
+         && utn_getNumberFloat(&getOne->peso, "Ingresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
+         && utn_getOnlyTwoChars(&getOne->sexo, "Ingresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
+         && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascora \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 2, 3))
+ {
+     printf("\nLISTADO DE DUEniOS DISPONIBLES\n");
+     cli_PrintList(listCliente, lenCliente);
+     if(utn_getNumber(&getOne->idDuenio, "\nIngresar ID del duenio: ", "Error, fuera de rango.", 0, 10000, 3)
+             && cli_findById(listCliente, lenCliente, getOne->idDuenio) >= 0)
+     {
+         getOne->id = id;
+         getOne->isEmpty = 0;
+         retorno = 1;
+     }
 
-    }
-    return retorno;
+ }
+ return retorno;
 }
-
+*/
 int masc_getOneDataModify(eMascota* getOne, int id, char* msg)
 {
     int retorno = 0;
     printf("%s", msg);
     if(utn_getString(getOne->nombre, MAS_LENNOMBRE, "\nIngresar un nombre: ", "Error. Dato invalido.", 2)
             && utn_getString(getOne->raza, MAS_LENRAZA, "\nIngresar un raza: ", "Error. Dato invalido.", 2)
-            && utn_getNumber(&getOne->edad, "Ingresar edad: ", "Error, fuera de rango.", 0, 120, 3)
-            && utn_getNumberFloat(&getOne->peso, "Ingresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
-            && utn_getOnlyTwoChars(&getOne->sexo, "Ingresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
+            && utn_getNumber(&getOne->edad, "\nIngresar edad: ", "Error, fuera de rango.", 0, 120, 3)
+            && utn_getNumberFloat(&getOne->peso, "\nIngresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
+            && utn_getOnlyTwoChars(&getOne->sexo, "\nIngresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
             && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascora \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 3, 3))
     {
         getOne->id = id;
@@ -312,39 +322,40 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
 
     do
     {
-    system("cls");
-    printf("\n--------------------------------------------------------------------------------------------------------\n");
-    printf(">> Listar mascotas segun un tipo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
-    printf("--------------------------------------------------------------------------------------------------------\n");
-    printf("\nQue tipo de mascota que desea mostrar?\n[0]PERRO\n[1]GATO\n[2]RARO\n[3]Salir\n");
-    if(listMascotas != NULL && lenMascotas > 0
-            && utn_getNumber(&type, "\nIngrese una opcion: ", "Error, ingresar (0 / 1 / 2 / 3).", 0, 3, 3) && type != 3)
-    {
-        retorno = 1;
-        printf("\n--------------------------------------------------------------------------------------------------------");
-        printf("\n| ID\t\tNOMBRE\t\t   TIPO\t\tRAZA\tEDAD\tSEXO\tPESO\t|    NOMBRE DEL DUENIO   |");
-        printf("\n--------------------------------------------------------------------------------------------------------");
-        for(i=0; i<lenMascotas; i++)
+        system("cls");
+        printf("\n--------------------------------------------------------------------------------------------------------\n");
+        printf(">> Listar mascotas segun un tipo >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>\n");
+        printf("--------------------------------------------------------------------------------------------------------\n");
+        printf("\nQue tipo de mascota que desea mostrar?\n[0]PERRO\n[1]GATO\n[2]RARO\n[3]Salir\n");
+        if(listMascotas != NULL && lenMascotas > 0
+                && utn_getNumber(&type, "\nIngrese una opcion: ", "Error, ingresar (0 / 1 / 2 / 3).", 0, 3, 3) && type != 3)
         {
-            index = cli_findById(listCliente, lenCliente, listMascotas[i].idDuenio);
-            if(index != -1 && listMascotas[i].tipo == type)
+            retorno = 1;
+            printf("\n--------------------------------------------------------------------------------------------------------");
+            printf("\n| ID\t\tNOMBRE\t\t   TIPO\t\tRAZA\tEDAD\tSEXO\tPESO\t|    NOMBRE DEL DUENIO   |");
+            printf("\n--------------------------------------------------------------------------------------------------------");
+            for(i=0; i<lenMascotas; i++)
             {
-                printf("\n| %d\t%15s\t%15s", listMascotas[i].id, listMascotas[i].nombre,MAS_TIPOS[listMascotas[i].tipo]);
-                printf("\t   %10s\t %d\t%c\t%.2f", listMascotas[i].raza, listMascotas[i].edad, listMascotas[i].sexo, listMascotas[i].peso);
-                if(index >= 0)
+                index = cli_findById(listCliente, lenCliente, listMascotas[i].idDuenio);
+                if(index != -1 && listMascotas[i].tipo == type)
                 {
-                    printf("\t|%15s\t|", listCliente[index].nombre);
-                }
-                else
-                {
-                    printf("\t|\tDADO DE BAJA\t|");
+                    printf("\n| %d\t%15s\t%15s", listMascotas[i].id, listMascotas[i].nombre,MAS_TIPOS[listMascotas[i].tipo]);
+                    printf("\t   %10s\t %d\t%c\t%.2f", listMascotas[i].raza, listMascotas[i].edad, listMascotas[i].sexo, listMascotas[i].peso);
+                    if(index >= 0)
+                    {
+                        printf("\t|%15s\t|", listCliente[index].nombre);
+                    }
+                    else
+                    {
+                        printf("\t|\tDADO DE BAJA\t|");
+                    }
                 }
             }
+            printf("\n---------------------------------------------------------------------------------------------------------\n\n");
+            system("pause");
         }
-        printf("\n---------------------------------------------------------------------------------------------------------\n\n");
-        system("pause");
     }
-    }while(type != 3);
+    while(type != 3);
 
     if(type == 3)
     {
@@ -352,3 +363,108 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
     }
     return retorno;
 }
+
+void masc_printRazas(int tipo)
+{
+    int i;
+    switch(tipo)
+    {
+    case 0:
+        printf("\n>> Listado de razas de PERROS disponibles: \n");
+        for(i = 0; i < MAS_LENRAZA_PERRO; i ++)
+        {
+            printf("\n[*] %s", MAS_RAZA_PERRO[i]);
+        }
+        break;
+    case 1:
+        printf("\n>> Listado de razas de GATOS disponibles:\n");
+        for(i = 0; i < MAS_LENRAZA_GATO; i ++)
+        {
+            printf("\n[*] %s", MAS_RAZA_GATO[i]);
+        }
+        break;
+    case 2:
+        printf("\n>> Listado de razas RARAS disponibles: \n");
+        for(i = 0; i < MAS_LENRAZA_RARO; i ++)
+        {
+            printf("\n[*] %s", MAS_RAZA_RARO[i]);
+        }
+        break;
+    }
+    printf("\n");
+}
+
+int masc_findRazaByType(int tipo, char* raza)
+{
+    int retorno = 0;
+    int i;
+    switch(tipo)
+    {
+    case 0:
+        for(i = 0; i < MAS_LENRAZA_PERRO; i++)
+        {
+            if(strcmpi(raza, MAS_RAZA_PERRO[i]) == 0)
+            {
+                retorno = 1;
+                printf("\n** RAZA CARGADA CON EXITO **!\n");
+                break;
+            }
+        }
+        break;
+    case 1:
+        for(i = 0; i < MAS_LENRAZA_GATO; i++)
+        {
+            if(strcmpi(raza, MAS_RAZA_GATO[i]) == 0)
+            {
+                retorno = 1;
+                printf("\n** RAZA CARGADA CON EXITO **!\n");
+                break;
+            }
+        }
+        break;
+    case 2:
+        for(i = 0; i < MAS_LENRAZA_RARO; i++)
+        {
+            if(strcmpi(raza, MAS_RAZA_RARO[i]) == 0)
+            {
+                retorno = 1;
+                printf("\n** RAZA CARGADA CON EXITO **!\n");
+                break;
+            }
+        }
+        break;
+    }
+    if(retorno == 0)
+    {
+        printf("\nERROR: no se encontro la raza ingresada. Vuelva a intentarlo.\n");
+    }
+    return retorno;
+}
+
+int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente)
+{
+    int retorno = 0;
+    printf("%s", msg);
+    if(utn_getString(getOne->nombre, MAS_LENNOMBRE, "\nIngresar un nombre: ", "Error. Dato invalido.", 2)
+            && utn_getNumber(&getOne->edad, "\nIngresar edad: ", "Error, fuera de rango.", 0, 120, 3)
+            && utn_getNumberFloat(&getOne->peso, "\nIngresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
+            && utn_getOnlyTwoChars(&getOne->sexo, "\nIngresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
+            && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascora \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 2, 3))
+    {
+        system("cls");
+        masc_printRazas(getOne->tipo);
+        if(utn_getString(getOne->raza, MAS_LENRAZA, "\n > Ingresar la raza del animal: ", "Error. Dato invalido.", 2) && masc_findRazaByType(getOne->tipo, getOne->raza))
+        {
+            cli_PrintList(listCliente, lenCliente);
+            if(utn_getNumber(&getOne->idDuenio, "\nIngresar ID del duenio: ", "Error, fuera de rango.", 0, 10000, 3)
+                    && cli_findById(listCliente, lenCliente, getOne->idDuenio) >= 0)
+            {
+                getOne->id = id;
+                getOne->isEmpty = 0;
+                retorno = 1;
+            }
+        }
+    }
+    return retorno;
+}
+

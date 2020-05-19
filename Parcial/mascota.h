@@ -8,8 +8,14 @@
 #define MAS_LENNOMBRE 51
 #define MAS_LENRAZA 51
 
-static const char MAS_TIPOS[3][6] = {"PERRO", "GATO", "RARO"};
+#define MAS_LENRAZA_PERRO 4
+#define MAS_LENRAZA_GATO 3
+#define MAS_LENRAZA_RARO 7
 
+static const char MAS_TIPOS[3][6] = {"PERRO", "GATO", "RARO"};
+static const char MAS_RAZA_PERRO[MAS_LENRAZA_PERRO][15] = {"Pitbull", "Labrador", "Salchicha", "Bulldog"};
+static const char MAS_RAZA_GATO[MAS_LENRAZA_GATO][10] = {"SIAMES", "ANGORA", "GATO PERSA"};
+static const char MAS_RAZA_RARO[MAS_LENRAZA_RARO][10] = {"REPTIL","IGUANA", "CARPINCHO", "PELICANO", "AGUILA", "RATON", "RATA"};
 typedef struct
 {
     int id;
@@ -39,3 +45,7 @@ int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, 
 int masc_getOneDataModify(eMascota* getOne, int id, char* msg);
 ///INFORMES
 int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente);
+
+/// PUNTO 4 BIS
+int masc_findRazaByType(int tipo, char* raza);
+void masc_printRazas(int tipo);

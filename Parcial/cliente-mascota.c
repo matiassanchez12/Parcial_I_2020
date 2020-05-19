@@ -8,10 +8,22 @@ static int promEdadMascotas(eMascota* list, int len);
 static int countEdadMascotas(eMascota* list, int len);
 static int acumEdadMascotas(eMascota* list, int len);
 ///18
+static int porceClientesSegunSexo(eCliente* list, int len);
 static int promClientesSegunSexo(eCliente* list, int len);
 static int countTodosLosClientes(eCliente* list, int len);
 static int countClientesPorSexo(eCliente* list, int len, char sexo);
 
+/** \brief despliega un menu propio de la entidad informes
+ *
+ * \param msgTitleMenu char* titulo que aparece en la parte superior del menu
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int cantidad maxima del array de mascotas
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int cantidad maxima del array de clientes
+ * \param listInformes eInformeCantidad* listado de informes
+ * \return void
+ *
+ */
 void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas,eCliente* listClientes, int lenClientes, eInformeCantidad* listInformes)
 {
     int option;
@@ -27,21 +39,28 @@ void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas
         printf("\n[6] MENU DE ORDENAMIENTOS:\n ->> 1. Clientes ordenados por cantidad de mascotas\n ->> 2. Clientes ordenados por cantidad de mascotas y nombre");
         printf("\n[7] MENU DE PROMEDIOS:\n ->> 1. Promedio de edad entre las mascotas\n ->> 2. Promedio de edad entre las mascotas, por tipo ");
         printf("\n[8] INFORMAR EL PROMEDIO ACTUAL DE CLIENTES Y CLIENTAS");
-        printf("\n[9] VOLVER AL MENU PRINCIPAL\n");
-        if(utn_getNumber(&option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 9, 2))
+        printf("\n[9] INFORMAR EL PORCENTAJE ACTUAL DE CLIENTES Y CLIENTAS");
+        printf("\n[10] En proceso");
+        printf("\n[11] En proceso");
+        printf("\n[12] VOLVER AL MENU PRINCIPAL\n");
+        if(utn_getNumber(&option, "\nSeleccionar una opcion: ", "Error, fuera de rango.", 1, 12, 2))
         {
             switch(option)
             {
             case 1:
+                system("cls");
                 info_mostrarClienteConMascotas(listClientes, lenClientes, listMascotas, lenMascotas);
                 break;
             case 2:
+                system("cls");
                 gen_checkReturnWithIf(info_sortAndPrint(listClientes, lenClientes, listMascotas, lenMascotas), "\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
                 break;
             case 3:
+                system("cls");
                 info_mostrarClienteConMasDeUnaMascota(listClientes, lenClientes, listMascotas, lenMascotas);
                 break;
             case 4:
+                system("cls");
                 info_mostrarClienteConMascotasMayoresAtres(listClientes, lenClientes, listMascotas, lenMascotas);
                 break;
             case 5:
@@ -55,13 +74,22 @@ void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas
                 gen_checkReturnWithIf( info_menuPromediarEdadMascotas(listMascotas, lenMascotas),"\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
                 break;
             case 8:
+                system("cls");
                 gen_checkReturnWithIf(promClientesSegunSexo(listClientes, lenClientes), "\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
+                break;
+            case 9:
+                system("cls");
+                gen_checkReturnWithIf(porceClientesSegunSexo(listClientes, lenClientes), "\nFinalizado exitosamente!\n", "\nError, algo salio mal..\n");
+                break;
+            case 10:
+                break;
+            case 11:
                 break;
             }
         }
         system("pause");
     }
-    while(option != 9);
+    while(option != 12);
 }
 
 void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
@@ -69,6 +97,8 @@ void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMa
     int i;
     int j;
     int count;
+    printf("\n---------------------------------------------------------------------------------------------------------");
+    printf("\n >> Mostrando Cliente con sus mascotas.. >> ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     printf("\n---------------------------------------------------------------------------------------------------------");
     printf("\n   ID CLIENTE\t\tNOMBRE DEL CLIENTE\t\tID MASCOTA\t\tNOMBRE DE LA MASCOTA/S");
     printf("\n---------------------------------------------------------------------------------------------------------");
@@ -545,7 +575,7 @@ static int acumEdadMascotas(eMascota* list, int len)
 
     return ret;
 }
-///PUNTO 18
+/**PUNTO 18 OPCION A
 static int promClientesSegunSexo(eCliente* list, int len)
 {
     int ret = 0;
@@ -554,8 +584,13 @@ static int promClientesSegunSexo(eCliente* list, int len)
     int countClienteM;
     float promM;
     float promF;
+
     if(list != NULL && len > 0)
     {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
         totalDeClientes = countTodosLosClientes(list, len);
         countClienteF = countClientesPorSexo(list, len, 'f');
         countClienteM = countClientesPorSexo(list, len, 'm');
@@ -576,8 +611,81 @@ static int promClientesSegunSexo(eCliente* list, int len)
     }
 
     return ret;
+}**/
+
+///OPCION B
+static int promClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float promM;
+    float promF;
+    if(list != NULL && len > 0)
+    {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            promF =  (float) totalDeClientes / countClienteF;
+            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
+            promM =  (float) totalDeClientes / countClienteM;
+            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
 }
 
+///OPCION C PORCENTAJE
+static int porceClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float porceM;
+    float porceF;
+    if(list != NULL && len > 0)
+    {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n|||||||||||| >> Mostrando el procentaje de clientes segun el sexo.. >> ||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            porceM =  ((float) countClienteM * 100) / totalDeClientes;
+            printf("\n\n> El porcentaje de CLIENTES hombres es: [%% %.2f].\n", porceM);
+            porceF =  ((float) countClienteF * 100) / totalDeClientes;
+            printf("\n\n> El porcentaje de CLIENTES mujeres es: [%% %.2f].\n", porceF);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}
 static int countClientesPorSexo(eCliente* list, int len, char sexo)
 {
     int ret = -1;

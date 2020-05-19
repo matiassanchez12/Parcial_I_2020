@@ -1,6 +1,14 @@
 #include "cliente.h"
 
-
+/** \brief despliega un menu propio de la entidad cliente
+ *
+ * \param msgTitleMenu char* titulo que aparece en la parte superior del menu
+ * \param list eCliente* listado de clientes
+ * \param lenghtList int cantidad maxima del array de clientes
+ * \param id int* puntero a la variable id del main
+ * \return void
+ *
+ */
 void cli_menuEntity(char* msgTitleMenu, eCliente* list, int lenghtList, int* id)
 {
     int option;

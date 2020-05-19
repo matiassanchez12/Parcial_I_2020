@@ -5,7 +5,7 @@
 #include "cliente-mascota.h"
 
 #define QUANTITY_CLIENTES 5
-#define QUANTITY_MASCOTAS 11
+#define QUANTITY_MASCOTAS 12
 
 int main()
 {
