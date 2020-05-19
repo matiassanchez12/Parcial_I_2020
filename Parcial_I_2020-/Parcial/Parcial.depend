@@ -1,0 +1,166 @@
+# depslib dependency file v1.0
+1589826727 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.c
+	"cliente-mascota.h"
+
+1589762015 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\genericas.c
+	"genericas.h"
+
+1589283856 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\genericas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1589283809 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\utn.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1589762971 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.c
+	"cliente.h"
+
+1589762114 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+
+1589855951 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"genericas.h"
+	"cliente-mascota.h"
+
+1589856513 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+	"cliente.h"
+
+1589283809 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\utn.c
+	"utn.h"
+
+1589855811 source:c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\mascota.c
+	"mascota.h"
+
+1589762677 c:\users\matukhan\desktop\proyecto parcial 11 05\parcial\cliente-mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"mascota.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\cliente-mascota.c
+	"cliente-mascota.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\cliente-mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"mascota.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\utn.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1589890929 c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+	"cliente.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\genericas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\cliente.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\cliente.c
+	"cliente.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\genericas.c
+	"genericas.h"
+
+1589890822 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"genericas.h"
+	"cliente-mascota.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\mascota.c
+	"mascota.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-1439876b580e23de503bba6da0458144627d4dc2\parcial\utn.c
+	"utn.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\cliente-mascota.c
+	"cliente-mascota.h"
+
+1589894264 c:\users\matukhan\desktop\parcial_i_2020-\parcial\cliente-mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"mascota.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-\parcial\utn.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1589892796 c:\users\matukhan\desktop\parcial_i_2020-\parcial\mascota.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+	"cliente.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-\parcial\genericas.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1589866072 c:\users\matukhan\desktop\parcial_i_2020-\parcial\cliente.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"genericas.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\cliente.c
+	"cliente.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\genericas.c
+	"genericas.h"
+
+1589893079 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"genericas.h"
+	"cliente-mascota.h"
+
+1589893611 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\mascota.c
+	"mascota.h"
+
+1589866072 source:c:\users\matukhan\desktop\parcial_i_2020-\parcial\utn.c
+	"utn.h"
+
