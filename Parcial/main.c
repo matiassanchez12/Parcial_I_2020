@@ -12,6 +12,7 @@ int main()
     int option;
     int idCliente = 0;
     int idMascotas = 0;
+    eRaza listRazas[QUANTITY_MASCOTAS];
     eInformeCantidad listInformes[QUANTITY_CLIENTES];
     eCliente listClientes[QUANTITY_CLIENTES];
     eMascota listMascotas[QUANTITY_MASCOTAS];

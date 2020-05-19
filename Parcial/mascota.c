@@ -75,7 +75,7 @@ int masc_initializer(eMascota* list, int len)
  * \return int -1 Error, 0 Accion cancelada, 1 alta exitosa
  *
  */
-int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listCliente, int lenCliente)
+int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listCliente, int lenCliente, eRaza* listRazas)
 {
     int retorno = -1;
     eMascota auxMascota;
@@ -85,7 +85,7 @@ int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listClie
     if(listMascotas != NULL && lenMascotas > 0 && index < lenMascotas && index >= 0 && id != NULL)
     {
         retorno = 0;
-        if(masc_getOneData(&auxMascota, *id, "\nIngresar datos\n", listCliente, lenCliente) == 1)
+        if(masc_getOneData(&auxMascota, *id, "\nIngresar datos\n", listCliente, lenCliente, listRazas) == 1)
         {
             retorno = 1;
             listMascotas[index] = auxMascota;
@@ -570,7 +570,7 @@ int masc_findRazaByType(int tipo, char* raza)
  * \return int 0 Error, 1 Se cargaron los datos con exito.
  *
  */
-int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente)
+int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente, eRaza* getRaza)
 {
     int retorno = 0;
     printf("%s", msg);
@@ -578,16 +578,20 @@ int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, 
             && utn_getNumber(&getOne->edad, "\nIngresar edad: ", "Error, fuera de rango.", 0, 120, 3)
             && utn_getNumberFloat(&getOne->peso, "\nIngresar peso: ", "Error, fuera de rango.", 0, 10000, 3)
             && utn_getOnlyTwoChars(&getOne->sexo, "\nIngresar sexo [f] o [m]", "Error. Solo [f] o [m].", 'f', 'm', 3)
-            && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascora \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 2, 3))
+            && utn_getNumber(&getOne->tipo, "\nIngresar tipo de mascota \n[0]PERRO\n[1]GATO\n[2]RARO\nIngresar tipo: ", "Error, fuera de rango.", 0, 2, 3))
     {
         system("cls");
         masc_printRazas(getOne->tipo);
-        if(utn_getString(getOne->raza, MAS_LENRAZA, "\n > Ingresar la raza del animal: ", "Error. Dato invalido.", 2) && masc_findRazaByType(getOne->tipo, getOne->raza))
+        if(utn_getString(getRaza->nombreDeRaza, MAS_LENRAZA, "\n > Ingresar la raza del animal: ", "Error. Dato invalido.", 2)
+           && (utn_getDireccion(getRaza->pais, MAS_LENRAZA, "\n > Ingresar el pais de la raza: ", "Error. Dato invalido.", 2)
+           && masc_findRazaByType(getOne->tipo, getRaza->pais))
         {
             cli_PrintList(listCliente, lenCliente);
             if(utn_getNumber(&getOne->idDuenio, "\nIngresar ID del duenio: ", "Error, fuera de rango.", 0, 10000, 3)
                     && cli_findById(listCliente, lenCliente, getOne->idDuenio) >= 0)
             {
+                getOne->raza = getRaza->nombreDeRaza;
+                getRaza->idMascota = id;
                 getOne->id = id;
                 getOne->isEmpty = 0;
                 retorno = 1;
