@@ -44,6 +44,13 @@ void masc_menuEntity(char* msgTitleMenu, eMascota* list, int lenghtList, int* id
     }
     while(option != 5);
 }
+/** \brief Inicializa el array de mascotas colocando isEmpty = 1 a cada elemento
+ *
+ * \param list eMascota* lista de mascotas
+ * \param len int tamaño limite del array
+ * \return int 1 se inicializo el array con exito, caso contrario 0
+ *
+ */
 int masc_initializer(eMascota* list, int len)
 {
     int retorno = 0;
@@ -58,6 +65,16 @@ int masc_initializer(eMascota* list, int len)
     }
     return retorno;///ERROR
 }
+/** \brief Da de alta una mascota
+ *
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array
+ * \param id int* puntero al id de mascotas
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array
+ * \return int -1 Error, 0 Accion cancelada, 1 alta exitosa
+ *
+ */
 int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listCliente, int lenCliente)
 {
     int retorno = -1;
@@ -77,6 +94,13 @@ int masc_Add(eMascota* listMascotas,int lenMascotas, int* id, eCliente* listClie
     }
     return retorno;
 }
+/** \brief Carga el array de mascotas automaticamente
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return void
+ *
+ */
 void masc_hardCodear(eMascota* list, int len)
 {
     int id[11]= {1,2,3,4,5,6,7,8,9,10,11};
@@ -101,8 +125,15 @@ void masc_hardCodear(eMascota* list, int len)
         list[i].isEmpty = 0;
     }
 }
-///-1 no se pudo encontrar id, 0 accion cancelada, 1 todo ok
-
+/** \brief Modifica una mascota a eleccion del usuario
+ *
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array de mascotas
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array de clientes
+ * \return int -1 Error, 0 Accion cancelada, 1 Se modifico con exito!
+ *
+ */
 int masc_Modify(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente)
 {
     int retorno = -1;
@@ -134,6 +165,15 @@ int masc_Modify(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, 
     return retorno;
 }
 
+/** \brief Elimita una mascota poniendo el campo isEmpty = 1
+ *
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array de mascotas
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array de clientes
+  * \return int -1 Error, 0 Accion cancelada, 1 Se elimino con exito!
+ *
+ */
 int masc_Remove(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente)
 {
     int retorno = -1;
@@ -159,7 +199,13 @@ int masc_Remove(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, 
     }
     return retorno;
 }
-
+/** \brief Ordena el array de mascotas
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return int 0 Error, 1 Ordenado con exito
+ *
+ */
 int masc_Sort(eMascota* list, int len)
 {
     int retorno = 0;
@@ -194,6 +240,15 @@ int masc_Sort(eMascota* list, int len)
     return retorno;
 }
 
+/** \brief Imprime el listado de mascotas
+ *
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array de mascotas
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array de clientes
+ * \return int 0 Error, 1 se imprimio exitosamente.
+ *
+ */
 int masc_PrintList(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente)
 {
     int retorno = 0;
@@ -226,6 +281,15 @@ int masc_PrintList(eMascota* listMascotas, int lenMascotas, eCliente* listClient
     }
     return retorno;
 }
+
+/** \brief Verifica la existencia de un elemento mediante su Id
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \param id int id de la mascota a ser verificado
+ * \return int En caso de existir devuelve el ID, caso contrario -1 Id inexistente.
+ *
+ */
 int masc_findById(eMascota* list, int len,int id)
 {
     int retorno = -1;
@@ -243,6 +307,13 @@ int masc_findById(eMascota* list, int len,int id)
     }
     return retorno;
 }
+/** \brief Busca el primer espacio libre del array (isEmpty = 1)
+ *
+ * \param list eMascota* listado de mascotas
+ * \param tam int cantidad limite del array
+ * \return int -1 No se encontro lugar libre, caso contrario devuelve el Index del elemento
+ *
+ */
 int masc_findIndexEmpty(eMascota* list, int tam)
 {
     int retorno = -1;
@@ -260,6 +331,13 @@ int masc_findIndexEmpty(eMascota* list, int tam)
     }
     return retorno;
 }
+/** \brief Realiza la accion de swap
+ *
+ * \param list eMascota* listado de mascotas
+ * \param iControl int variable de control
+ * \return void
+ *
+ */
 void masc_swapForSort(eMascota* list, int iControl)
 {
     eMascota auxMascota;
@@ -269,7 +347,18 @@ void masc_swapForSort(eMascota* list, int iControl)
     list[iControl+1] = auxMascota;
 }
 
-/*
+
+/** \brief Toma los datos de una mascota para ser pasados a la funcion 'Add'
+ *
+ * \param getOne eMascota* auxiliar donde seran guardados los datos
+ * \param id int id de la mascota
+ * \param msg char* mensaje de introduccion para el usuario
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array clientes
+ * \return int 0 Error, 1 Se cargaron los datos con exito.
+ *
+ */
+ /*
 int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente)
 {
  int retorno = 0;
@@ -295,6 +384,15 @@ int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, 
  return retorno;
 }
 */
+
+/** \brief Toma los datos de una mascota para ser reemplazados por los del listado
+ *
+ * \param getOne eMascota* auxiliar donde se guardaran los datos
+ * \param id int id de la mascota
+ * \param msg char* mensaje de introduccion para el usuario
+ * \return int 0 Error, 1 Se cargaron los datos con exito.
+ *
+ */
 int masc_getOneDataModify(eMascota* getOne, int id, char* msg)
 {
     int retorno = 0;
@@ -313,6 +411,15 @@ int masc_getOneDataModify(eMascota* getOne, int id, char* msg)
     return retorno;
 }
 
+/** \brief Muestra un menu de opciones para listar solo un determinado tipo de mascotas
+ *
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array clientes
+ * \return int 0 Error, 1 Listado mostrado con exito!.
+ *
+ */
 int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCliente, int lenCliente)
 {
     int retorno = 0;
@@ -354,8 +461,7 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
             printf("\n---------------------------------------------------------------------------------------------------------\n\n");
             system("pause");
         }
-    }
-    while(type != 3);
+    }while(type != 3);
 
     if(type == 3)
     {
@@ -364,6 +470,12 @@ int masc_PrintForType(eMascota* listMascotas, int lenMascotas, eCliente* listCli
     return retorno;
 }
 
+/** \brief Imprime el listado de razas segun su tipo
+ *
+ * \param tipo int el tipo de raza
+ * \return void
+ *
+ */
 void masc_printRazas(int tipo)
 {
     int i;
@@ -394,6 +506,13 @@ void masc_printRazas(int tipo)
     printf("\n");
 }
 
+/** \brief Verifica la existencia de la raza indicada por el usuario
+ *
+ * \param tipo int tipo de raza
+ * \param raza char* nombre de la raza indicada
+ * \return int 1 El nombre de la raza existe, caso contrario 0.
+ *
+ */
 int masc_findRazaByType(int tipo, char* raza)
 {
     int retorno = 0;
@@ -441,6 +560,16 @@ int masc_findRazaByType(int tipo, char* raza)
     return retorno;
 }
 
+/** \brief Toma los datos de una mascota para ser pasados a la funcion 'Add'
+ *
+ * \param getOne eMascota* auxiliar donde seran guardados los datos
+ * \param id int id de la mascota
+ * \param msg char* mensaje de introduccion para el usuario
+ * \param listCliente eCliente* listado de clientes
+ * \param lenCliente int tamaño limite del array clientes
+ * \return int 0 Error, 1 Se cargaron los datos con exito.
+ *
+ */
 int masc_getOneData(eMascota* getOne, int id, char* msg, eCliente* listCliente, int lenCliente)
 {
     int retorno = 0;

@@ -1,5 +1,11 @@
 
 #include "genericas.h"
+/** \brief Imprime el menu principal del programa
+ *
+ * \param option int* opcion elegida por el usuario
+ * \return int Devuelve 1 opcion tomada exitosamente, caso contrario 0.
+ *
+ */
 int mainMenu(int* option)
 {
     int retorno = 0;
@@ -19,6 +25,14 @@ int mainMenu(int* option)
     return retorno;
 }
 
+/** \brief Verifica el valor que retorna una funcion y imprime un mensaje
+ *
+ * \param function int funcion a verificar
+ * \param msgAllRight char* Mensaje de exito (1)
+ * \param msgError char* Mensaje de Error (0)
+ * \return void
+ *
+ */
 void gen_checkReturnWithIf(int function, char* msgAllRight, char* msgError)
 {
     if(function)
@@ -30,6 +44,16 @@ void gen_checkReturnWithIf(int function, char* msgAllRight, char* msgError)
         printf("%s", msgError);
     }
 }
+
+/** \brief Verifica el valor que retorna una funcion y imprime un mensaje
+ *
+ * \param function int funcion a verificar su retorno
+ * \param msgAllRight char* Mensaje de exito (1)
+ * \param msgError char* Mensaje de Error (-1)
+ * \param msgCancelOp char* Mesaje de cancelacion(0)
+ * \return void
+ *
+ */
 void gen_checkReturnWithSwitch(int function, char* msgAllRight, char* msgCancelOp, char* msgError)
 {
     switch(function)

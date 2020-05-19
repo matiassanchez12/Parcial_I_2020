@@ -42,6 +42,13 @@ void cli_menuEntity(char* msgTitleMenu, eCliente* list, int lenghtList, int* id)
         system("pause");
     }while(option != 5);
 }
+/** \brief Inicializa el array de clientes(isEmpty = 1)
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int 1 Se inicializo exitosamente, caso contrario 0.
+ *
+ */
 int cli_initializer(eCliente* list, int len)
 {
     int retorno = 0;
@@ -56,6 +63,14 @@ int cli_initializer(eCliente* list, int len)
     }
     return retorno;///ERROR
 }
+/** \brief Agrega un cliente al listado de clientes
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \param id int* puntero al id de clientes
+ * \return int -1 Error, 0 Accion cancelada, 1 Cliente agregado con exito!.
+ *
+ */
 int cli_Add(eCliente* list,int len, int* id)
 {
     int retorno = -1;
@@ -75,6 +90,13 @@ int cli_Add(eCliente* list,int len, int* id)
     }
     return retorno;
 }
+/** \brief Hardcodea todos los clientes
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return void
+ *
+ */
 void cli_hardCodear(eCliente* list, int len)
 {
     int id[5]= {1,2,3,4,5};
@@ -97,7 +119,13 @@ void cli_hardCodear(eCliente* list, int len)
         list[i].isEmpty = 0;
     }
 }
-
+/** \brief Elimina un cliente(isEmpty = 1)
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int -1 Error, 0 Accion cancelada, 1 Eliminado con exito!.
+ *
+ */
 int cli_Remove(eCliente* list, int len)
 {
     int retorno = -1;
@@ -123,6 +151,13 @@ int cli_Remove(eCliente* list, int len)
     return retorno;
 }
 
+/** \brief Indicando un id se modifica un cliente
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int -1 Error, 0 Accion cancelada, 1 Modificacion exitosa!.
+ *
+ */
 int cli_Modify(eCliente* list, int len)
 {
     int retorno = -1;
@@ -154,6 +189,13 @@ int cli_Modify(eCliente* list, int len)
 }
 
 
+/** \brief Lista todos los clientes
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int 1 listado exitoso, caso contrario 0.
+ *
+ */
 int cli_PrintList(eCliente* list, int len)
 {
     int retorno = 0;
@@ -176,6 +218,15 @@ int cli_PrintList(eCliente* list, int len)
     }
     return retorno;
 }
+
+/** \brief Se le pasa un id y verifica su existencia en el array
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \param id int id a verificar existencia
+ * \return int Devuelve el index del id >0, caso contrario -1.
+ *
+ */
 int cli_findById(eCliente* list, int len,int id)
 {
     int retorno = -1;
@@ -193,6 +244,13 @@ int cli_findById(eCliente* list, int len,int id)
     }
     return retorno;
 }
+/** \brief Busca el primer espacio libre(isEmpty = 1) del array
+ *
+ * \param list eCliente* listado de clientes
+ * \param tam int tamaño limite del array
+ * \return int Devuelve >= 0 en caso encontrar espacio, y -1 si no.
+ *
+ */
 int cli_findIndexEmpty(eCliente* list, int tam)
 {
     int retorno = -1;
@@ -210,6 +268,13 @@ int cli_findIndexEmpty(eCliente* list, int tam)
     }
     return retorno;
 }
+/** \brief Realiza la accion de swap
+ *
+ * \param list eCliente* listado de clientes
+ * \param iControl int variable de control
+ * \return void
+ *
+ */
 void cli_swapForSort(eCliente* list, int iControl)
 {
     eCliente auxCliente;
@@ -220,6 +285,14 @@ void cli_swapForSort(eCliente* list, int iControl)
 }
 
 
+/** \brief Toma los datos del cliente que seran usados en la funcion 'Add'
+ *
+ * \param getOne eCliente* auxiliar donde se guardaran los datos
+ * \param id int id del cliente
+ * \param msg char* mensaje de introduccion para el usuario
+ * \return int Devuelve 1 si guardo los datos, caso contrario 0.
+ *
+ */
 int cli_getOneData(eCliente* getOne, int id, char* msg)
 {
     int retorno = 0;

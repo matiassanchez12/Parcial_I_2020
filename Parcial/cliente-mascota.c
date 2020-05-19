@@ -13,6 +13,369 @@ static int promClientesSegunSexo(eCliente* list, int len);
 static int countTodosLosClientes(eCliente* list, int len);
 static int countClientesPorSexo(eCliente* list, int len, char sexo);
 
+/** \brief Calcula el promedio de edad de mascotas de un solo tipo
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return int 1 Promedio calculado con exito, caso contrario 0.
+ *
+ */
+static int promEdadMascotasPorTipo(eMascota* list, int len)
+{
+    int ret = 0;
+    int countEdadMascota;
+    int acumEdadMascota;
+    float promEdad;
+    int tipo;
+    printf("\n======================================================================================");
+    printf("\n>> Seleccione un tipo de mascota para calcular un promedio de edades >>\n[0]PERRO\n[1]GATO\n[2]RARO\n[3]Salir\n\n");
+    if(list != NULL && len > 0 && utn_getNumber(&tipo, "Ingresar una opcion: ", "Error, fuera de rango.", 0, 3, 4) && tipo != 3)
+    {
+        countEdadMascota = countEdadMascotasPorTipo(list, len, tipo);
+        acumEdadMascota = acumEdadMascotasPorTipo(list, len, tipo);
+        if(countEdadMascota != -1 && acumEdadMascota != -1)
+        {
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            ret = 1;
+            promEdad =  (float) acumEdadMascota / countEdadMascota;
+            printf("\n\n> El promedio de edad entre mascotas del tipo: [%s] , es: [%.2f].\n", MAS_TIPOS[tipo], promEdad);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+    if(tipo == 3)
+    {
+        printf("\nVolviendo al menu de informes..\n");
+        ret = 1;
+    }
+    return ret;
+}
+/** \brief cuenta la cantidad de mascotas de un tipo
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del listado de mascotas
+ * \param tipo int tipo de mascota
+ * \return int Devuelve >= 0 caso de haber contado con exito, caso contrario -1.
+ *
+ */
+static int countEdadMascotasPorTipo(eMascota* list, int len, int tipo)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0 && list[i].tipo == tipo)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
+/** \brief Acumula la edad de mascotas de un tipo
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \param tipo int tipo de mascota
+ * \return int Devuelve >= 0 caso de haber acumulado con exito, caso contrario -1.
+ *
+ */
+static int acumEdadMascotasPorTipo(eMascota* list, int len, int tipo)
+{
+    int ret = -1;
+    int i;
+    int acum = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0  && list[i].tipo == tipo)
+            {
+                acum = acum + list[i].edad;
+            }
+        }
+    }
+    ret = acum;
+
+    return ret;
+}
+
+/** \brief Calcula el promedio de edad de las mascotas
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return int retorna 1 promedio calculado con exito, caso contrario 0.
+ *
+ */
+static int promEdadMascotas(eMascota* list, int len)
+{
+    int ret = 0;
+    int countEdadMascota;
+    int acumEdadMascota;
+    float promEdad;
+    if(list != NULL && len > 0)
+    {
+        countEdadMascota = countEdadMascotas(list, len);
+        acumEdadMascota = acumEdadMascotas(list, len);
+        if(countEdadMascota != -1 && acumEdadMascota != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            promEdad =  (float) acumEdadMascota / countEdadMascota;
+            printf("\n\n> El promedio de edad entre mascotas es: [%.2f].\n", promEdad);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}
+
+/** \brief Cuenta edades de las mascotas
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return int Devuelve >= 0 caso de contar exitosamente, caso contrario 0.
+ *
+ */
+static int countEdadMascotas(eMascota* list, int len)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
+/** \brief Acumula edades de las mascotas
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int tamaño limite del array
+ * \return int Devuelve >= 0 caso de contar exitosamente, caso contrario 0.
+ *
+ */
+static int acumEdadMascotas(eMascota* list, int len)
+{
+    int ret = -1;
+    int i;
+    int acum = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0)
+            {
+                acum = acum + list[i].edad;
+            }
+        }
+    }
+    ret = acum;
+
+    return ret;
+}
+/**PUNTO 18 OPCION A
+static int promClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float promM;
+    float promF;
+
+    if(list != NULL && len > 0)
+    {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            promF =  (float) countClienteF / totalDeClientes;
+            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
+            promM =  (float) countClienteM / totalDeClientes;
+            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}**/
+
+///OPCION B
+/** \brief Calcula el promedio de clientes de ambos sexos
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int Devuelve 1 promedio calculado exitosamente, caso contrario 0.
+ *
+ */
+static int promClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float promM;
+    float promF;
+    if(list != NULL && len > 0)
+    {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            promF =  (float) totalDeClientes / countClienteF;
+            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
+            promM =  (float) totalDeClientes / countClienteM;
+            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}
+
+///OPCION C PORCENTAJE
+/** \brief Calcula el porcentaje de clientes de ambos sexos
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \return int Devuelve 1 porcentaje calculado exitosamente, caso contrario 0.
+ *
+ */
+static int porceClientesSegunSexo(eCliente* list, int len)
+{
+    int ret = 0;
+    int totalDeClientes;
+    int countClienteF;
+    int countClienteM;
+    float porceM;
+    float porceF;
+    if(list != NULL && len > 0)
+    {
+        printf("\n-------------------------------------------------------------------------------------");
+        printf("\n|||||||||||| >> Mostrando el procentaje de clientes segun el sexo.. >> ||||||||||||||");
+        printf("\n-------------------------------------------------------------------------------------\n");
+        printf("-------------------------------------------------------------------------------------");
+        totalDeClientes = countTodosLosClientes(list, len);
+        countClienteF = countClientesPorSexo(list, len, 'f');
+        countClienteM = countClientesPorSexo(list, len, 'm');
+        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
+        {
+            ret = 1;
+            printf("\n=============================>> Informe solicitado <<================================\n");
+            porceM =  ((float) countClienteM * 100) / totalDeClientes;
+            printf("\n\n> El porcentaje de CLIENTES hombres es: [%% %.2f].\n", porceM);
+            porceF =  ((float) countClienteF * 100) / totalDeClientes;
+            printf("\n\n> El porcentaje de CLIENTES mujeres es: [%% %.2f].\n", porceF);
+            printf("\n=====================================================================================\n");
+        }
+        else
+        {
+            printf("\nError: No hay suficientes datos para esta operacion. ");
+        }
+    }
+
+    return ret;
+}
+/** \brief Cuenta los clientes de un solo sexo
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array
+ * \param sexo char el sexo a contar
+ * \return int Devuelve >= 0 caso de conteo exitoso, caso contrario -1.
+ *
+ */
+static int countClientesPorSexo(eCliente* list, int len, char sexo)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0 && list[i].sexo == sexo)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
+/** \brief Cuenta todos los clientes
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del cliente
+ * \return int Devuelve >= 0 caso de conteo exitoso, caso contrario -1.
+ *
+ */
+static int countTodosLosClientes(eCliente* list, int len)
+{
+    int ret = -1;
+    int i;
+    int count = 0;
+    if(list != NULL && len > 0)
+    {
+        for(i = 0; i < len; i++)
+        {
+            if(list[i].isEmpty == 0)
+            {
+                count ++;
+            }
+        }
+    }
+    ret = count;
+
+    return ret;
+}
+
 /** \brief despliega un menu propio de la entidad informes
  *
  * \param msgTitleMenu char* titulo que aparece en la parte superior del menu
@@ -92,13 +455,22 @@ void info_menuEntity(char* msgTitleMenu, eMascota* listMascotas, int lenMascotas
     while(option != 12);
 }
 
+/** \brief muestra los clientes con sus mascotas
+ *
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \return void
+ *
+ */
 void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
 {
     int i;
     int j;
     int count;
     printf("\n---------------------------------------------------------------------------------------------------------");
-    printf("\n >> Mostrando Cliente con sus mascotas.. >> ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+    printf("\n||||||||||||||||||||||||||||||| >> Mostrando Cliente con sus mascotas.. >> |||||||||||||||||||||||||||||");
     printf("\n---------------------------------------------------------------------------------------------------------");
     printf("\n   ID CLIENTE\t\tNOMBRE DEL CLIENTE\t\tID MASCOTA\t\tNOMBRE DE LA MASCOTA/S");
     printf("\n---------------------------------------------------------------------------------------------------------");
@@ -133,6 +505,15 @@ void info_mostrarClienteConMascotas(eCliente* listClientes, int lenClientes, eMa
     printf("\n");
 }
 
+/** \brief Ordena por el tipo de mascota y muestra el listado de clientes
+ *
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \return int Devuelve 1 si muestra y ordenado exitosamente,caso contrario 0.
+ *
+ */
 int info_sortAndPrint(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
 {
     int retorno = 0;
@@ -147,7 +528,15 @@ int info_sortAndPrint(eCliente* listClientes, int lenClientes, eMascota* listMas
     }
     return retorno;
 }
-
+/** \brief Muestra un listado de todos los clientes que tienen mas de una mascota
+ *
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \return void
+ *
+ */
 void info_mostrarClienteConMasDeUnaMascota(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
 {
     int i;
@@ -201,6 +590,15 @@ void info_mostrarClienteConMasDeUnaMascota(eCliente* listClientes, int lenClient
     printf("\n");
 }
 
+/** \brief muestra clientes con mascotas mayores a 3 años
+ *
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \return void
+ *
+ */
 void info_mostrarClienteConMascotasMayoresAtres(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas)
 {
     int i;
@@ -233,6 +631,16 @@ void info_mostrarClienteConMascotasMayoresAtres(eCliente* listClientes, int lenC
     printf("\n");
 }
 
+/** \brief Cuenta las mascotas de cada cliente
+ *
+ * \param listClientes eCliente* listado de clientes
+ * \param lenClientes int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \param arrayDeInformes eInformeCantidad* listado que informa las cantidades
+ * \return void
+ *
+ */
 void info_contMascotasDeCliente(eCliente* listClientes, int lenClientes, eMascota* listMascotas, int lenMascotas, eInformeCantidad* arrayDeInformes)
 {
     int i;
@@ -261,6 +669,13 @@ void info_contMascotasDeCliente(eCliente* listClientes, int lenClientes, eMascot
     }
 }
 
+/** \brief Ordena clientes por cantidad de mascotas
+ *
+ * \param listInformes eInformeCantidad* listado que informa las cantidades
+ * \param lenClientes int tamaño limite del array clientes
+ * \return int Devuelve 1 si ordeno correctamente, 0 caso contrario.
+ *
+ */
 int info_sortClientePorCantidad(eInformeCantidad* listInformes, int lenClientes)
 {
     int retorno = 0;
@@ -296,6 +711,13 @@ int info_sortClientePorCantidad(eInformeCantidad* listInformes, int lenClientes)
     return retorno;
 }
 
+/** \brief Ordena clientes por cantidad de mascotas y sus nombres
+ *
+ * \param listInformes eInformeCantidad* listado que informa las cantidades
+ * \param lenClientes int  tamaño limite del array clientes
+ * \return int Devuelve 1 si ordeno correctamente, 0 caso contrario.
+ *
+ */
 int info_sortClientePorCantidadYNombre(eInformeCantidad* listInformes, int lenClientes)
 {
     int retorno = 0;
@@ -335,6 +757,13 @@ int info_sortClientePorCantidadYNombre(eInformeCantidad* listInformes, int lenCl
     return retorno;
 }
 
+/** \brief Menu para mostrar ordenamientos por cantidad y nombre
+ *
+ * \param listInformes eInformeCantidad* listado que informa las cantidades
+ * \param lenClientes int  tamaño limite del array clientes
+ * \return int Devuelve 1 si ordeno correctamente, 0 caso contrario.
+ *
+ */
 int info_menuParaMostrarClientesOrdenados(eInformeCantidad* listInformes, int lenListClientes)
 {
     int retorno = 0;
@@ -378,6 +807,13 @@ int info_menuParaMostrarClientesOrdenados(eInformeCantidad* listInformes, int le
     return retorno;
 }
 
+/** \brief Imprime listado de clientes con la cantidad de mascotas
+ *
+ * \param list eInformeCantidad* listado que informa las cantidades
+ * \param len int  tamaño limite del array clientes
+ * \return void
+ *
+ */
 void info_printListClientes(eInformeCantidad* list, int len)
 {
     int i;
@@ -399,6 +835,13 @@ void info_printListClientes(eInformeCantidad* list, int len)
     }
 }
 
+/** \brief menu para promediar edades de mascotas
+ *
+ * \param list eMascota* listado de mascotas
+ * \param len int Tamaño limite del array mascotas
+ * \return int 1 listado mostrado con exito, caso contrario 0.
+ *
+ */
 int info_menuPromediarEdadMascotas(eMascota* list, int len)
 {
     int retorno = 0;
@@ -436,296 +879,15 @@ int info_menuPromediarEdadMascotas(eMascota* list, int len)
     return retorno;
 }
 
-static int promEdadMascotasPorTipo(eMascota* list, int len)
-{
-    int ret = 0;
-    int countEdadMascota;
-    int acumEdadMascota;
-    float promEdad;
-    int tipo;
-    printf("\n======================================================================================");
-    printf("\n>> Seleccione un tipo de mascota para calcular un promedio de edades >>\n[0]PERRO\n[1]GATO\n[2]RARO\n[3]Salir\n\n");
-    if(list != NULL && len > 0 && utn_getNumber(&tipo, "Ingresar una opcion: ", "Error, fuera de rango.", 0, 3, 4) && tipo != 3)
-    {
-        countEdadMascota = countEdadMascotasPorTipo(list, len, tipo);
-        acumEdadMascota = acumEdadMascotasPorTipo(list, len, tipo);
-        if(countEdadMascota != -1 && acumEdadMascota != -1)
-        {
-            printf("\n=============================>> Informe solicitado <<================================\n");
-            ret = 1;
-            promEdad =  (float) acumEdadMascota / countEdadMascota;
-            printf("\n\n> El promedio de edad entre mascotas del tipo: [%s] , es: [%.2f].\n", MAS_TIPOS[tipo], promEdad);
-            printf("\n=====================================================================================\n");
-        }
-        else
-        {
-            printf("\nError: No hay suficientes datos para esta operacion. ");
-        }
-    }
-    if(tipo == 3)
-    {
-        printf("\nVolviendo al menu de informes..\n");
-        ret = 1;
-    }
-    return ret;
-}
-static int countEdadMascotasPorTipo(eMascota* list, int len, int tipo)
-{
-    int ret = -1;
-    int i;
-    int count = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0 && list[i].tipo == tipo)
-            {
-                count ++;
-            }
-        }
-    }
-    ret = count;
-
-    return ret;
-}
-
-static int acumEdadMascotasPorTipo(eMascota* list, int len, int tipo)
-{
-    int ret = -1;
-    int i;
-    int acum = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0  && list[i].tipo == tipo)
-            {
-                acum = acum + list[i].edad;
-            }
-        }
-    }
-    ret = acum;
-
-    return ret;
-}
-
-static int promEdadMascotas(eMascota* list, int len)
-{
-    int ret = 0;
-    int countEdadMascota;
-    int acumEdadMascota;
-    float promEdad;
-    if(list != NULL && len > 0)
-    {
-        countEdadMascota = countEdadMascotas(list, len);
-        acumEdadMascota = acumEdadMascotas(list, len);
-        if(countEdadMascota != -1 && acumEdadMascota != -1)
-        {
-            ret = 1;
-            printf("\n=============================>> Informe solicitado <<================================\n");
-            promEdad =  (float) acumEdadMascota / countEdadMascota;
-            printf("\n\n> El promedio de edad entre mascotas es: [%.2f].\n", promEdad);
-            printf("\n=====================================================================================\n");
-        }
-        else
-        {
-            printf("\nError: No hay suficientes datos para esta operacion. ");
-        }
-    }
-
-    return ret;
-}
-
-static int countEdadMascotas(eMascota* list, int len)
-{
-    int ret = -1;
-    int i;
-    int count = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0)
-            {
-                count ++;
-            }
-        }
-    }
-    ret = count;
-
-    return ret;
-}
-
-static int acumEdadMascotas(eMascota* list, int len)
-{
-    int ret = -1;
-    int i;
-    int acum = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0)
-            {
-                acum = acum + list[i].edad;
-            }
-        }
-    }
-    ret = acum;
-
-    return ret;
-}
-/**PUNTO 18 OPCION A
-static int promClientesSegunSexo(eCliente* list, int len)
-{
-    int ret = 0;
-    int totalDeClientes;
-    int countClienteF;
-    int countClienteM;
-    float promM;
-    float promF;
-
-    if(list != NULL && len > 0)
-    {
-        printf("\n-------------------------------------------------------------------------------------");
-        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
-        printf("\n-------------------------------------------------------------------------------------\n");
-        printf("-------------------------------------------------------------------------------------");
-        totalDeClientes = countTodosLosClientes(list, len);
-        countClienteF = countClientesPorSexo(list, len, 'f');
-        countClienteM = countClientesPorSexo(list, len, 'm');
-        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
-        {
-            ret = 1;
-            printf("\n=============================>> Informe solicitado <<================================\n");
-            promF =  (float) countClienteF / totalDeClientes;
-            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
-            promM =  (float) countClienteM / totalDeClientes;
-            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
-            printf("\n=====================================================================================\n");
-        }
-        else
-        {
-            printf("\nError: No hay suficientes datos para esta operacion. ");
-        }
-    }
-
-    return ret;
-}**/
-
-///OPCION B
-static int promClientesSegunSexo(eCliente* list, int len)
-{
-    int ret = 0;
-    int totalDeClientes;
-    int countClienteF;
-    int countClienteM;
-    float promM;
-    float promF;
-    if(list != NULL && len > 0)
-    {
-        printf("\n-------------------------------------------------------------------------------------");
-        printf("\n||||||||||||| >> Mostrando el promedio de clientes segun el sexo.. >> |||||||||||||||");
-        printf("\n-------------------------------------------------------------------------------------\n");
-        printf("-------------------------------------------------------------------------------------");
-        totalDeClientes = countTodosLosClientes(list, len);
-        countClienteF = countClientesPorSexo(list, len, 'f');
-        countClienteM = countClientesPorSexo(list, len, 'm');
-        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
-        {
-            ret = 1;
-            printf("\n=============================>> Informe solicitado <<================================\n");
-            promF =  (float) totalDeClientes / countClienteF;
-            printf("\n\n> El promedio de CLIENTAS es: [%.2f].\n", promF);
-            promM =  (float) totalDeClientes / countClienteM;
-            printf("\n\n> El promedio de CLIENTES es: [%.2f].\n", promM);
-            printf("\n=====================================================================================\n");
-        }
-        else
-        {
-            printf("\nError: No hay suficientes datos para esta operacion. ");
-        }
-    }
-
-    return ret;
-}
-
-///OPCION C PORCENTAJE
-static int porceClientesSegunSexo(eCliente* list, int len)
-{
-    int ret = 0;
-    int totalDeClientes;
-    int countClienteF;
-    int countClienteM;
-    float porceM;
-    float porceF;
-    if(list != NULL && len > 0)
-    {
-        printf("\n-------------------------------------------------------------------------------------");
-        printf("\n|||||||||||| >> Mostrando el procentaje de clientes segun el sexo.. >> ||||||||||||||");
-        printf("\n-------------------------------------------------------------------------------------\n");
-        printf("-------------------------------------------------------------------------------------");
-        totalDeClientes = countTodosLosClientes(list, len);
-        countClienteF = countClientesPorSexo(list, len, 'f');
-        countClienteM = countClientesPorSexo(list, len, 'm');
-        if(countClienteF != -1 && countClienteM != -1 && totalDeClientes != -1)
-        {
-            ret = 1;
-            printf("\n=============================>> Informe solicitado <<================================\n");
-            porceM =  ((float) countClienteM * 100) / totalDeClientes;
-            printf("\n\n> El porcentaje de CLIENTES hombres es: [%% %.2f].\n", porceM);
-            porceF =  ((float) countClienteF * 100) / totalDeClientes;
-            printf("\n\n> El porcentaje de CLIENTES mujeres es: [%% %.2f].\n", porceF);
-            printf("\n=====================================================================================\n");
-        }
-        else
-        {
-            printf("\nError: No hay suficientes datos para esta operacion. ");
-        }
-    }
-
-    return ret;
-}
-static int countClientesPorSexo(eCliente* list, int len, char sexo)
-{
-    int ret = -1;
-    int i;
-    int count = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0 && list[i].sexo == sexo)
-            {
-                count ++;
-            }
-        }
-    }
-    ret = count;
-
-    return ret;
-}
-
-static int countTodosLosClientes(eCliente* list, int len)
-{
-    int ret = -1;
-    int i;
-    int count = 0;
-    if(list != NULL && len > 0)
-    {
-        for(i = 0; i < len; i++)
-        {
-            if(list[i].isEmpty == 0)
-            {
-                count ++;
-            }
-        }
-    }
-    ret = count;
-
-    return ret;
-}
-
+/** \brief Se elimina un cliente y junto con el todos sus mascotas cargadas en el sistema
+ *
+ * \param list eCliente* listado de clientes
+ * \param len int tamaño limite del array clientes
+ * \param listMascotas eMascota* listado de mascotas
+ * \param lenMascotas int tamaño limite del array mascotas
+ * \return int -1 Error, 0 Accion cancelada, 1 Eliminacion en casacada exitosa!.
+ *
+ */
 int info_bajaEnCascadaCliente(eCliente* list, int len, eMascota* listMascotas, int lenMascotas)
 {
     int retorno = -1;
